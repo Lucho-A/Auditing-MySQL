@@ -1,2 +1,3 @@
 # Auditing-MySQL
-Script for auditing MySQL databases in C, Ansi-style
+
+***(Under development)*** Script for auditing MySQL databases in C, Ansi-style
