@@ -10,26 +10,14 @@
 
 #include "Auditing-MySQL.h"
 
-int perform_mySQL_query(MYSQL *conn, MYSQL_RES **result, char *query){
-	if (mysql_query(conn, query)){
-		printf("%d %s\n", errno, strerror(errno));
-		printf("%sError (%s)\n\n",  C_RED, mysql_error(conn));
-		mysql_close(conn);
-		return 0;
-	}else{
-		*result = mysql_store_result(conn);
-		return mysql_num_rows(*result);
-	}
-}
-
 int perform_MySQL_connection(MYSQL **conn){
 	*conn = mysql_init(NULL);
 	if(*conn == NULL){
-		printf("Error (%s)\n", mysql_error(*conn));
+		printf("%sMySQL error (%s)\n\n",  C_HRED, mysql_error(*conn));
 		return RETURN_ERROR;
 	}
 	if(mysql_real_connect(*conn, SERVER_IP, USER, PASS, DB, SERVER_PORT, NULL, 0) == NULL){
-		fprintf(stderr, "\n%s%s\n\n",  C_RED, mysql_error(*conn));
+		printf("%sMySQL error (%s)\n\n",  C_HRED, mysql_error(*conn));
 		mysql_close(*conn);
 		return RETURN_ERROR;
 	}else{
@@ -37,7 +25,19 @@ int perform_MySQL_connection(MYSQL **conn){
 	}
 }
 
-int mysql_brute_force(void){
+int perform_mySQL_query(MYSQL *conn, MYSQL_RES **result, char *query){
+	if (mysql_query(conn, query)){
+		show_error("", errno);
+		printf("%sMySQL error (%s)\n\n",  C_HRED, mysql_error(conn));
+		mysql_close(conn);
+		return RETURN_ERROR;
+	}else{
+		*result = mysql_store_result(conn);
+		return mysql_num_rows(*result);
+	}
+}
+
+int perform_mySQL_brute_force(void){
 	double totalComb=0, cont=0, contUsersFound=0;
 	int i=0;
 	FILE *f=NULL;
@@ -59,14 +59,14 @@ int mysql_brute_force(void){
 		for(int j=0;j<totalPasswords;j++,cont++){
 			if(conn==NULL) conn=mysql_init(NULL);
 			if(conn==NULL){
-				printf("%sError (%s)\n\n",  C_RED, strerror(errno));
+				show_error("", errno);
 				return RETURN_ERROR;
 			}
-			printf("\rPercentaje completed: %s%.4lf%% (%s/%s)%s               ",C_GREEN,(double)((cont/totalComb)*100.0),usernames[i], passwords[j], C_WHITE);
+			printf("\r%sPercentaje completed: %s%.4lf%% (%s/%s)               ",C_WHITE,C_GREEN, (double)((cont/totalComb)*100.0),usernames[i], passwords[j]);
 			fflush(stdout);
 			usleep(BRUTE_FORCE_DELAY);
 			if(mysql_real_connect(conn, SERVER_IP, usernames[i], passwords[j], DB, SERVER_PORT, NULL, 0) != NULL){
-				printf("%sError (%s)\n\n",  C_RED, strerror(errno));
+				show_error("", errno);
 				printf("%s",C_RED);
 				printf("\n\nLoging successfull with user: %s, password: %s. Service Vulnerable\n\n",usernames[i], passwords[j]);
 				mysql_close(conn);

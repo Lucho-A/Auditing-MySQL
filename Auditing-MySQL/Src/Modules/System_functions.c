@@ -11,7 +11,8 @@
 #include "Auditing-MySQL.h"
 
 void system_call(char *cmd){
-	printf("%s\n",C_RED);
+	printf("%s\n",C_RESULTS);
 	system(cmd);
 	printf("%s\n", C_WHITE);
+	return;
 }

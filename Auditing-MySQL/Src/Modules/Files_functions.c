@@ -31,7 +31,6 @@ int find_file_rec(char *path, char *filename, int *fileFounds){
 					find_file_rec(fullpath, filename, fileFounds);
 				}else{
 					if(strstr(fullpath, filename)!=NULL){
-						printf("%s\nFile found: %s\n", C_RED, fullpath);
 						snprintf(cmd, sizeof(cmd), "ls -la %s", fullpath);
 						system_call(cmd);
 						(*fileFounds)++;
@@ -41,9 +40,10 @@ int find_file_rec(char *path, char *filename, int *fileFounds){
 			}
 		}
 		closedir(dir);
+	}else{
+		show_error("", errno);
+		return RETURN_ERROR;
 	}
-	else
-		printf("Error %d (%s)\n", errno, strerror (errno));
 	return *fileFounds;
 }
 
@@ -51,10 +51,8 @@ int open_file(char *fileName, FILE **f){
 	char file[256]="";
 	snprintf(file,sizeof(file),"%s%s", PATH_TO_RESOURCES,fileName);
 	if((*f=fopen(file,"r"))==NULL){
-		printf("%s",C_RED);
-		printf("fopen(%s) error: Error: %d (%s)\n", fileName, errno, strerror(errno));
-		printf("%s",C_DEFAULT);
-		return -1;
+		show_error("", errno);
+		return RETURN_ERROR;
 	}
 	int entries=0;
 	char buffer[256]="";
