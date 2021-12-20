@@ -23,6 +23,9 @@
 #define RETURN_OK 1
 #define RETURN_ERROR -1
 
+#define TRUE 1
+#define FALSE 0
+
 #define C_WHITE "\e[0;37m"
 #define C_DEFAULT "\e[0m"
 #define C_RED "\e[0;31m"
@@ -38,9 +41,15 @@
 #define MYSQL_CONFIG_DIR "/etc/mysql"
 #define HOME_DIR "/home"
 
+#define BRUTE_FORCE_DELAY 100000
+#define PATH_TO_RESOURCES "/home/lucho/git/Auditing-MySQL/Auditing-MySQL/Resources/"
+
+int mysql_brute_force(void);
 int perform_mySQL_query(MYSQL *conn, MYSQL_RES **result, char *query);
 int perform_MySQL_connection(MYSQL **conn);
 void system_call(char *cmd);
-void find_file(char *basePath, char *filename);
+int find_file(char *path, char *filename);
+int find_file_rec(char *basePath, char *filename, int *fileFounds);
+int open_file(char *fileName, FILE **f);
 
 #endif /* AUDITING_MYSQL_H_ */

@@ -1,0 +1,6 @@
+root
+mysql
+admin
+cloudera
+dbuser
+asteriskuser
