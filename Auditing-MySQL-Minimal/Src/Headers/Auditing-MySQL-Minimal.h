@@ -54,7 +54,6 @@ int perform_mySQL_brute_force(void);
 void system_call(char *cmd);
 int find_file(char *path, char *filename);
 int find_file_rec(char *basePath, char *filename, int *fileFounds);
-int open_file(char *fileName, FILE **f);
 void show_intro(void);
 void show_error(char *errMsg, int errnum);
 

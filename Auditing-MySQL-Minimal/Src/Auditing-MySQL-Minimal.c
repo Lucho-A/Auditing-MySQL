@@ -6,7 +6,7 @@
  Copyright   : GPL 3.0
  Description :
  ============================================================================
- */
+*/
 
 #include <Auditing-MySQL-Minimal.h>
 
@@ -54,14 +54,14 @@ int main(void) {
 	int contUsersFound=	perform_mySQL_brute_force();
 	(contUsersFound==0)?(printf("\n\n%sNo users/passwords hacked\n", C_RESULTS)):(printf("\n%sUsers & passwords hacked: \n", C_RESULTS));
 	//*****************************************************
-	printf("%s\n*) 'Max_user_connections' by global and by user: \n",C_WHITE);
+	printf("%s\n*) 'Max_user_connections' (Global): \n",C_WHITE);
 	snprintf(query, sizeof(query),
 			"SELECT VARIABLE_NAME, VARIABLE_VALUE "
 			"FROM performance_schema.global_variables "
 			"WHERE VARIABLE_NAME LIKE 'max_user_connections' ;");
 	numRows=perform_mySQL_query(conn, &result, query);
 	printf("%s\n", C_RESULTS);
-	while ((row = mysql_fetch_row(result))) printf("(Global) %s: %s\n\n", (row[0])?(row[0]):("NULL"),(row[1])?(row[1]):("NULL"));
+	while ((row = mysql_fetch_row(result))) printf("%s: %s\n\n", (row[0])?(row[0]):("NULL"),(row[1])?(row[1]):("NULL"));
 	//*****************************************************
 	printf("%s\n*) 'Audit Log' plugin status: \n",C_WHITE);
 	snprintf(query, sizeof(query),
@@ -70,7 +70,7 @@ int main(void) {
 			"WHERE PLUGIN_NAME LIKE 'audit_log';");
 	numRows=perform_mySQL_query(conn, &result, query);
 	printf("%s\n", C_RESULTS);
-	while ((row = mysql_fetch_row(result))) printf("(Global) %s: %s\n\n", (row[0])?(row[0]):("NULL"),(row[1])?(row[1]):("NULL"));
+	while ((row = mysql_fetch_row(result))) printf("%s: %s\n\n", (row[0])?(row[0]):("NULL"),(row[1])?(row[1]):("NULL"));
 	if(numRows==0){
 		printf("%sPlugin not installed.\n",C_YEL);
 	}else{
@@ -81,7 +81,7 @@ int main(void) {
 				"WHERE VARIABLE_NAME LIKE 'audit_log_encryption';");
 		numRows=perform_mySQL_query(conn, &result, query);
 		printf("%s\n", C_RESULTS);
-		while ((row = mysql_fetch_row(result))) printf("(Global) %s: %s\n\n", (row[0])?(row[0]):("NULL"),(row[1])?(row[1]):("NULL"));
+		while ((row = mysql_fetch_row(result))) printf("%s: %s\n\n", (row[0])?(row[0]):("NULL"),(row[1])?(row[1]):("NULL"));
 	}
 	mysql_free_result(result);
 	mysql_close(conn);

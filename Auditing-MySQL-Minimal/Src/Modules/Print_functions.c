@@ -21,11 +21,14 @@ void show_intro(void){
 	printf("\n*");
 	printf("\n* Auditing MYSQL by L.");
 	printf("\n*");
-	printf("\n* v0.0.1\n*");
+	printf("\n* v0.0.1");
 	printf("\n*");
 	printf("\n* This is just a minimal/example version. ");
 	printf("\n*");
-	printf("\n* For in-deep version, as well, for others systems/plattforms (Cybersecurity, Oracle, AIX, SAP HANA, among others), pls, contact me! (luis.alfie@gmail.com)\n*");
+	printf("\n* For in-deep version, as well, for others systems/plattforms (Cybersecurity, Oracle, AIX, SAP HANA, among others), pls, contact me!");
+	printf("\n*");
+	printf("\n* Email: luis.alfie@gmail.com");
+	printf("\n*");
 	printf("\n***********************************************************************************************************************************************************");
 	printf("%s",C_WHITE);
 	time_t timestamp = time(NULL);
