@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : Auditing-MySql.h
+ Name        : Auditing-MySql-Minimal.h
  Author      : L.
  Version     : 0.0.1
  Copyright   : GPL 3.0
@@ -8,8 +8,8 @@
  ============================================================================
 */
 
-#ifndef AUDITING_MYSQL_H_
-#define AUDITING_MYSQL_H_
+#ifndef AUDITING_MYSQL_MINIMAL_H_
+#define AUDITING_MYSQL_MINIMAL_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,19 +37,20 @@
 
 #define SERVER_IP "localhost"
 #define SERVER_PORT 3306
-#define USER "lucho"
-#define PASS ""
-#define DB "sys"
+#define USER "Auditing-MySQL"
+#define PASS "Auditing-MySQL-Pass"
+#define DB ""
 #define MYSQL_DIR "/var/lib/mysql"
-#define MYSQL_CONFIG_DIR "/etc/mysql"
 #define HOME_DIR "/home"
 
-#define BRUTE_FORCE_DELAY 100000
-#define PATH_TO_RESOURCES "/home/lucho/git/Auditing-MySQL/Auditing-MySQL/Resources/"
+#define USERNAMES 3
+#define PASSWORDS 3
 
-int perform_mySQL_brute_force(void);
-int perform_mySQL_query(MYSQL *conn, MYSQL_RES **result, char *query);
+#define BRUTE_FORCE_DELAY 100000
+
 int perform_MySQL_connection(MYSQL **conn);
+int perform_mySQL_query(MYSQL *conn, MYSQL_RES **result, char *query);
+int perform_mySQL_brute_force(void);
 void system_call(char *cmd);
 int find_file(char *path, char *filename);
 int find_file_rec(char *basePath, char *filename, int *fileFounds);
@@ -57,4 +58,4 @@ int open_file(char *fileName, FILE **f);
 void show_intro(void);
 void show_error(char *errMsg, int errnum);
 
-#endif /* AUDITING_MYSQL_H_ */
+#endif /* AUDITING_MYSQL_MINIMAL_H_ */

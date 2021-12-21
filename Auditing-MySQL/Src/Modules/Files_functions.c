@@ -8,7 +8,7 @@
  ============================================================================
  */
 
-#include "Auditing-MySQL.h"
+#include <Auditing-MySQL-Minimal.h>
 
 int find_file(char *path, char *filename){
 	int fileFounds=0;
@@ -45,19 +45,5 @@ int find_file_rec(char *path, char *filename, int *fileFounds){
 		return RETURN_ERROR;
 	}
 	return *fileFounds;
-}
-
-int open_file(char *fileName, FILE **f){
-	char file[256]="";
-	snprintf(file,sizeof(file),"%s%s", PATH_TO_RESOURCES,fileName);
-	if((*f=fopen(file,"r"))==NULL){
-		show_error("", errno);
-		return RETURN_ERROR;
-	}
-	int entries=0;
-	char buffer[256]="";
-	while(fscanf(*f, "%s ", buffer)!=EOF) entries++;
-	rewind(*f);
-	return entries;
 }
 

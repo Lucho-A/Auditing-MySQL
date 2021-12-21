@@ -8,7 +8,7 @@
  ============================================================================
  */
 
-#include "Auditing-MySQL.h"
+#include "Auditing-MySQL-Minimal.h"
 
 void show_intro(void){
 	if(getuid()!=0){
@@ -17,14 +17,20 @@ void show_intro(void){
 	}
 	system("clear");
 	printf("%s",C_CYAN);
-	printf("\n*******************************************************\n*");
-	printf("\n* Auditing MYSQL by L.\n*");
+	printf("\n**********************************************************************************************************************************");
+	printf("\n*");
+	printf("\n* Auditing MYSQL by L.");
+	printf("\n*");
 	printf("\n* v0.0.1\n*");
-	printf("\n*******************************************************\n");
+	printf("\n*");
+	printf("\n* This is just a minimal/example version. ");
+	printf("\n*");
+	printf("\n* For in-deep version, as well, for others systems/plattforms (Oracle, AIX, SAP, etc.), pls, contact me! (luis.alfie@gmail.com)\n*");
+	printf("\n**********************************************************************************************************************************");
 	printf("%s",C_WHITE);
 	time_t timestamp = time(NULL);
 	struct tm tm = *localtime(&timestamp);
-	printf("\nStarting at: %d/%02d/%02d %02d:%02d:%02d\n\n",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+	printf("\n\nStarting at: %d/%02d/%02d %02d:%02d:%02d\n\n",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 	printf("%s",C_DEFAULT);
 	return;
 }

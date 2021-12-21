@@ -8,7 +8,7 @@
  ============================================================================
 */
 
-#include "Auditing-MySQL.h"
+#include <Auditing-MySQL-Minimal.h>
 
 void system_call(char *cmd){
 	printf("%s\n",C_RESULTS);
